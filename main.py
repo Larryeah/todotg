@@ -2,7 +2,7 @@ import telebot
 from telebot import types
 import sqlite3
 
-bot = telebot.TeleBot("7884887946:AAG8-4A98vjnmgUukqVZ9LhwjBga4s1v5C8")
+bot = telebot.TeleBot("")
 
 def print_dict(dict, message=None):
     result = "\n".join(f"{k}. {v}" for k, v in dict.items())
