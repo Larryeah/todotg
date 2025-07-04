@@ -1,8 +1,12 @@
 import telebot
 from telebot import types
 import sqlite3
+from dotenv import load_dotenv
+import os
 
-bot = telebot.TeleBot("")
+load_dotenv()
+bot = telebot.TeleBot(os.getenv("TOKEN"))
+
 
 def print_dict(dict, message=None):
     result = "\n".join(f"{k}. {v}" for k, v in dict.items())
@@ -64,7 +68,7 @@ def tasks(message):
     elif message.text == "4. Удалить все задачи":
         dict.clear()
         bot.send_message(message.chat.id, f"Все задачи удалены!", parse_mode="html")
-    else:  bot.send_message(message.chat.id, f"Чтобы воспользоваться ботом, используй команды снизу (Специальной клавиатурой)", parse_mode="html")
+    else:  bot.send_message(message.chat.id, f"Чтобы воспользоваться ботом, используй команды снизу (Специальной клавиатурой). Если клавиатуры нет - напиши /start", parse_mode="html")
 
 bot.message_handler()
 
