@@ -14,6 +14,15 @@ def print_dict(dict, message=None):
 
 def add_task(message):
     dict[f"{len(dict) + 1}"] = f"{message.text}"
+
+    # conn = sqlite3.connect('baza.sql')
+    # cur = conn.cursor()
+    # cur.execute('CREATE TABLE IF NOT EXISTS tasks (id int auto_increment primary key, TEXT NOT NULL')
+    # conn.commit()
+    # cur.close()
+    # conn.close()
+
+
     bot.send_message(message.chat.id, f"<b>Задача успешно добавлена.</b>\n\nВаш список:\n{print_dict(dict)}", parse_mode="html")
 
 def delete_task(message):
@@ -29,21 +38,26 @@ dict = {
 # Приветственное сообщение
 @bot.message_handler(commands=['start'])
 def start(message):
-    #Создаем БД на SQlite3
-    # conn = sqlite3.connect('baza.sql')
-    # cur = conn.cursor()
-    # cur.execute('CREATE TABLE IF NOT EXISTS users (id int auto_increment primary key, name varchar(50), pass varchar(50)')
-    # conn.commit()
-    # cur.close()
-    # conn.close()
-    #
-    # bot.send_message()
 
+    #Создаем БД на SQlite3
+#     conn = sqlite3.connect('baza.sql')
+#     cur = conn.cursor()
+#     cur.execute('''
+# CREATE TABLE IF NOT EXISTS user_tasks (
+#     id INTEGER PRIMARY KEY AUTOINCREMENT,
+#     user_id INTEGER NOT NULL,
+#     task TEXT NOT NULL
+# );
+# ''')
+#     conn.commit()
+#     cur.close()
+#     conn.close()
+
+    #выводим сообщение и создаем кнопки
     mess = f"""<b>Привет, {message.from_user.first_name}.</b>
 Этот телеграмм бот создан для отслеживания дел на день.
 Для создания задач воспользуйтесь командами ниже ⬇️
 """
-    # bot.send_message(message.chat.id, mess, parse_mode='html')
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     todolist = types.KeyboardButton("1. Показать список на день")
     add = types.KeyboardButton("2. Добавить задачу")
